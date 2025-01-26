@@ -50,11 +50,11 @@ const LiffInit = () => {
                 liffProfile.userId ||
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
               }`}
-              <span>あなたのLINEIDは</span>
+              {/* <span>あなたのLINEIDは</span>
               <span className="break-words">
                 {liffProfileId || "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
               </span>
-              <span>です</span>
+              <span>です</span> */}
             </p>
           </div>
         </>
