@@ -6,8 +6,7 @@ import liff from "@line/liff";
 const LiffInit = () => {
   const [liffObject, setLiffObject] = useState(null);
   const [liffError, setLiffError] = useState(null);
-  const [liffProfileName, setLiffProfileName] = useState(null);
-  const [liffProfileId, setLiffProfileId] = useState(null);
+  const [liffProfile, setLiffProfile] = useState(null);
 
   useEffect(() => {
     console.log("start liff.init()...");
@@ -19,10 +18,9 @@ const LiffInit = () => {
 
         if (liff.isLoggedIn()) {
           liff.getProfile().then((profile) => {
-            const name = profile.displayName;
-            const lineID = profile.userId;
-            setLiffProfileName(name);
-            setLiffProfileId(lineID);
+            // const name = profile.displayName;
+            // const lineID = profile.userId;
+            setLiffProfile(profile);
           });
         }
       })
@@ -37,23 +35,26 @@ const LiffInit = () => {
       });
   }, []);
 
+  console.log(liffProfile);
+
   return (
     <>
-      {liffObject ? (
+      {liffProfile ? (
         <>
           <div className="flex justify-center flex-col">
             <p className="break-words">{`名前：${
-              liffProfileName || "ユーザーネーム"
+              liffProfile.displayName || "ユーザーネーム"
             }`}</p>
             <p className="break-all">
               {`LINEID：${
-                liffProfileId || "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                liffProfile.userId ||
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
               }`}
-              {/* <span>あなたのLINEIDは</span>
+              <span>あなたのLINEIDは</span>
               <span className="break-words">
                 {liffProfileId || "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
               </span>
-              <span>です</span> */}
+              <span>です</span>
             </p>
           </div>
         </>
