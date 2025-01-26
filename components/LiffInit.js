@@ -41,7 +41,7 @@ const LiffInit = () => {
     <>
       {liffObject ? (
         <>
-          <div>
+          <div className="flex justify-center items-center flex-col">
             <p>{`こんにちわ${liffProfileName || ""}さん`}</p>
             <p>{`あなたのLINEIDは${liffProfileId || ""}です`}</p>
           </div>
