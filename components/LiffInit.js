@@ -6,7 +6,8 @@ import liff from "@line/liff";
 const LiffInit = () => {
   const [liffObject, setLiffObject] = useState(null);
   const [liffError, setLiffError] = useState(null);
-  const [liffProfile, setLiffProfile] = useState(null);
+  const [liffProfileName, setLiffProfileName] = useState(null);
+  const [liffProfileId, setLiffProfileId] = useState(null);
 
   useEffect(() => {
     console.log("start liff.init()...");
@@ -16,10 +17,14 @@ const LiffInit = () => {
         console.log("liff.init() done");
         setLiffObject(liff);
 
-        liff.getProfile().then((profile) => {
-          const name = profile.displayName;
-          setLiffProfile(name);
-        });
+        if (liff.isLoggedIn()) {
+          liff.getProfile().then((profile) => {
+            const name = profile.displayName;
+            const lineID = profile.userId;
+            setLiffProfileName(name);
+            setLiffProfileId(lineID);
+          });
+        }
       })
       .catch((error) => {
         console.log(`liff.init() failed: ${error}`);
@@ -32,6 +37,17 @@ const LiffInit = () => {
       });
   }, []);
 
-  return <div>{liffProfile || "名無し"}</div>;
+  return (
+    <>
+      {liffObject ? (
+        <>
+          <div>
+            <p>{`こんにちわ${liffProfileName || ""}さん`}</p>
+            <p>{`あなたのLINEIDは${liffProfileId || ""}です`}</p>
+          </div>
+        </>
+      ) : null}
+    </>
+  );
 };
 export default LiffInit;
