@@ -42,8 +42,14 @@ const LiffInit = () => {
       {liffObject ? (
         <>
           <div className="flex justify-center items-center flex-col">
-            <p>{`こんにちわ${liffProfileName || ""}さん`}</p>
-            <p>{`あなたのLINEIDは${liffProfileId || ""}です`}</p>
+            <p className="break-words">{`こんにちわ${
+              liffProfileName || ""
+            }さん`}</p>
+            <p className="break-words">
+              <span>あなたのLINEIDは</span>
+              <span>{liffProfileId || ""}</span>
+              <span>です</span>
+            </p>
           </div>
         </>
       ) : null}
